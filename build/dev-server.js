@@ -7,7 +7,7 @@ if (!process.env.NODE_ENV) {
 
 var opn = require('opn')
 var path = require('path')
-var express = require('express')
+// var express = require('express')
 var webpack = require('webpack')
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = process.env.NODE_ENV === 'testing'
@@ -22,10 +22,15 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
 
-var app = express()
+// var app = express()
 var compiler = webpack(webpackConfig)
 
-var devMiddleware = require('webpack-dev-middleware')(compiler, {
+require('webpack-dev-middleware-hard-disk')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  quiet: true
+})
+
+/*var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
   quiet: true
 })
@@ -88,4 +93,4 @@ module.exports = {
   close: () => {
     server.close()
   }
-}
+}*/
